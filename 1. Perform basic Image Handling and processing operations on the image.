@@ -1,0 +1,55 @@
+1. Perform basic Image Handling and processing operations on the image.
+a. Read an image in python and Convert the given Image into Grayscale
+code:-
+import cv2
+img = cv2.imread(r"C:\Users\jampa\Downloads\dsa0201.jpg")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+cv2.imshow("Original Image", img)
+cv2.imshow("Grayscale Image", gray)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+b. Read an image in python and Convert an Image to Blur using GaussianBlur.
+code:-
+import cv2
+img = cv2.imread(r"C:\Users\jampa\Downloads\dsa0201.jpg")
+blur = cv2.GaussianBlur(img, (5,5), 0)
+cv2.imshow("Original Image", img)
+cv2.imshow("Gaussian Blur", blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+c. Read an image in python and Convert the given Image to show outline using Canny
+function.
+code:-
+import cv2
+img = cv2.imread(r"C:\Users\jampa\Downloads\dsa0201.jpg")
+canny = cv2.Canny(img, 100, 200)
+cv2.imshow("Original Image", img)
+cv2.imshow("Canny Edge", canny)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+d. Read an image in python and Dilate an Image using Dilate function.
+code:-
+import cv2
+import numpy as np
+img = cv2.imread(r"C:\Users\jampa\Downloads\dsa0201.jpg")
+canny = cv2.Canny(img, 100, 200)
+kernel = np.ones((5,5), np.uint8)
+dilate = cv2.dilate(canny, kernel, iterations=1)
+cv2.imshow("Dilated Image", dilate)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+e. Read an image in python and Erode an Image using erode function.
+code:-
+import cv2
+import numpy as np
+img = cv2.imread(r"C:\Users\jampa\Downloads\dsa0201.jpg")
+canny = cv2.Canny(img, 100, 200)
+kernel = np.ones((5,5), np.uint8)
+erode = cv2.erode(canny, kernel, iterations=1)
+cv2.imshow("Eroded Image", erode)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
