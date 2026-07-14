@@ -1,46 +1,31 @@
 2. Perform basic video processing operations on the captured video
 code:-
 import cv2
-import numpy as np
-
-# Open webcam
-cap = cv2.VideoCapture(0)
-
-while True:
+video_path = r"C:\Users\jampa\Downloads\13931625-uhd_2160_3840_24fps.mp4"
+print("Select Video Speed")
+print("1. Slow Motion")
+print("2. Normal Motion")
+print("3. Fast Motion")
+choice = input("Enter your choice (1/2/3): ")
+if choice == "1":
+    delay = 100
+elif choice == "2":
+    delay = 30
+elif choice == "3":
+    delay = 5
+else:
+    print("Invalid choice. Playing in normal speed.")
+    delay = 30
+cap = cv2.VideoCapture(video_path)
+while cap.isOpened():
     ret, frame = cap.read()
-
     if not ret:
         break
-
-    # Convert to Grayscale
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-    # Gaussian Blur
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
-
-    # Canny Edge Detection
-    edges = cv2.Canny(blur, 100, 200)
-
-    # Kernel for Dilation and Erosion
-    kernel = np.ones((5, 5), np.uint8)
-
-    # Dilate
-    dilated = cv2.dilate(edges, kernel, iterations=1)
-
-    # Erode
-    eroded = cv2.erode(dilated, kernel, iterations=1)
-
-    # Display Results
-    cv2.imshow("Original Video", frame)
-    cv2.imshow("Grayscale", gray)
-    cv2.imshow("Blur", blur)
-    cv2.imshow("Canny Edge", edges)
-    cv2.imshow("Dilated", dilated)
-    cv2.imshow("Eroded", eroded)
-
-    # Press 'q' to quit
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    frame = cv2.resize(frame, (800, 600))
+    cv2.imshow("Video", frame)
+    if cv2.waitKey(delay) & 0xFF == ord('q'):
         break
-
 cap.release()
 cv2.destroyAllWindows()
+    
+ 
