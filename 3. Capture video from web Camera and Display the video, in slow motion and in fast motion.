@@ -1,0 +1,31 @@
+import cv2
+print("Select Webcam Speed")
+print("1. Slow Motion")
+print("2. Normal Motion")
+print("3. Fast Motion")
+choice = input("Enter your choice (1/2/3): ")
+if choice == "1":
+    delay = 100      # Slow
+elif choice == "2":
+    delay = 30       # Normal
+elif choice == "3":
+    delay = 5        # Fast
+else:
+    print("Invalid choice! Using Normal Speed.")
+    delay = 30
+# Open Webcam
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open webcam")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Failed to capture frame")
+        break
+    cv2.imshow("Webcam", frame)
+    # Press 'q' to quit
+    if cv2.waitKey(delay) & 0xFF == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
